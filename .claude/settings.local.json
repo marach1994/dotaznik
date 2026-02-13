@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd /c \"dir C:\\\\Vibecode\\\\dotaznik\")",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next build)",
+      "Bash(git init:*)"
+    ]
+  }
+}

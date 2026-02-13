@@ -1,0 +1,257 @@
+import { SectionConfig } from './types'
+
+export const sections: SectionConfig[] = [
+  {
+    id: 'section-1',
+    title: 'Sekce 1: Řízení & přehled',
+    questions: [
+      {
+        id: 's1_q1',
+        field: 's1_q1_metrics',
+        label: 'Sledujete pravidelně:',
+        type: 'checkbox',
+        options: ['obrat', 'zisk', 'marži', 'cashflow'],
+      },
+      {
+        id: 's1_q2',
+        field: 's1_q2_costs',
+        label: 'Máte přehled o všech provozních nákladech na jednom místě?',
+        type: 'radio',
+        options: ['Ano', 'Částečně', 'Ne'],
+      },
+      {
+        id: 's1_q3',
+        field: 's1_q3_pno',
+        label: 'Máte přehled o PNO celé firmy, ne jen reklamy?',
+        type: 'radio',
+        options: ['Ano', 'Ne'],
+      },
+      {
+        id: 's1_q4',
+        field: 's1_q4_frequency',
+        label: 'Jak často vyhodnocujete ziskovost?',
+        type: 'radio',
+        options: ['měsíčně', 'kvartálně', 'nepravidelně'],
+      },
+    ],
+  },
+  {
+    id: 'section-2',
+    title: 'Sekce 2: Finance & marže',
+    questions: [
+      {
+        id: 's2_q1',
+        field: 's2_q1_purchase_prices',
+        label: 'Evidujete nákupní ceny u všech produktů?',
+        type: 'radio',
+        options: ['Ano', 'Částečně', 'Ne'],
+      },
+      {
+        id: 's2_q2',
+        field: 's2_q2_margin',
+        label: 'Máte přehled o marži:',
+        type: 'checkbox',
+        options: ['celého e-shopu', 'po kategoriích', 'nemáme'],
+      },
+      {
+        id: 's2_q3',
+        field: 's2_q3_costs_knowledge',
+        label: 'Znáte své fixní a variabilní náklady?',
+        type: 'radio',
+        options: ['Ano', 'Přibližně', 'Ne'],
+      },
+      {
+        id: 's2_q4',
+        field: 's2_q4_cashflow',
+        label: 'Máte problém s cashflow kvůli zásobám?',
+        type: 'radio',
+        options: ['Ano', 'Spíš ano', 'Ne'],
+      },
+    ],
+  },
+  {
+    id: 'section-3',
+    title: 'Sekce 3: Produkty & sklad',
+    questions: [
+      {
+        id: 's3_q1',
+        field: 's3_q1_top_products',
+        label: 'Máte jasně definované:',
+        type: 'checkbox',
+        options: ['TOP produkty podle obratu', 'TOP produkty podle marže'],
+      },
+      {
+        id: 's3_q2',
+        field: 's3_q2_product_overview',
+        label: 'Máte přehled o produktech, které:',
+        type: 'checkbox',
+        options: [
+          'dělají obrat, ale malý zisk',
+          'mají vysokou marži, ale malý objem',
+        ],
+      },
+      {
+        id: 's3_q3',
+        field: 's3_q3_old_stock',
+        label: 'Máte přehled o ležácích (produkty skladem déle než X měsíců)?',
+        type: 'radio',
+        options: ['Ano', 'Přibližně', 'Ne'],
+      },
+      {
+        id: 's3_q4',
+        field: 's3_q4_pareto',
+        label: 'Kolik % produktů dělá cca 80 % obratu?',
+        type: 'radio',
+        options: ['Víme', 'Odhad', 'Nevíme'],
+      },
+    ],
+  },
+  {
+    id: 'section-4',
+    title: 'Sekce 4: Doprava & logistika',
+    questions: [
+      {
+        id: 's4_q1',
+        field: 's4_q1_carriers',
+        label: 'Jaké dopravce využíváte?',
+        type: 'checkbox',
+        options: ['Zásilkovna', 'PPL', 'DPD', 'GLS', 'jiní'],
+      },
+      {
+        id: 's4_q2',
+        field: 's4_q2_invoice_check',
+        label: 'Kontrolujete faktury dopravců?',
+        type: 'radio',
+        options: ['Ano', 'Občas', 'Ne'],
+      },
+      {
+        id: 's4_q3',
+        field: 's4_q3_shipping_cost',
+        label: 'Víte, kolik vás stojí doprava na jednu objednávku?',
+        type: 'radio',
+        options: ['Ano', 'Přibližně', 'Ne'],
+      },
+      {
+        id: 's4_q4',
+        field: 's4_q4_shipping_complaints',
+        label: 'Máte problémy s reklamacemi přepravy?',
+        type: 'radio',
+        options: ['Ano', 'Spíš ano', 'Ne'],
+      },
+    ],
+  },
+  {
+    id: 'section-5',
+    title: 'Sekce 5: Flow objednávek & automatizace',
+    questions: [
+      {
+        id: 's5_q1',
+        field: 's5_q1_automation',
+        label: 'Co z níže uvedeného je automatizované?',
+        type: 'checkbox',
+        options: [
+          'změny stavů objednávek',
+          'urgence plateb',
+          'storno neuhrazených objednávek',
+          'hlídání nízkých zásob',
+          'nic z výše uvedeného',
+        ],
+      },
+      {
+        id: 's5_q2',
+        field: 's5_q2_emails',
+        label: 'Odesílají se automatické e-maily:',
+        type: 'checkbox',
+        options: ['potvrzení objednávky', 'odeslání + tracking', 'po doručení'],
+      },
+    ],
+  },
+  {
+    id: 'section-6',
+    title: 'Sekce 6: Zákazník & retence',
+    questions: [
+      {
+        id: 's6_q1',
+        field: 's6_q1_repeat_customers',
+        label: 'Kolik % zákazníků nakupuje opakovaně?',
+        type: 'radio',
+        options: ['Víme', 'Odhad', 'Nevíme'],
+      },
+      {
+        id: 's6_q2',
+        field: 's6_q2_retention',
+        label: 'Používáte:',
+        type: 'checkbox',
+        options: ['cross-sell / up-sell', 'věrnostní program', 'nic z toho'],
+      },
+      {
+        id: 's6_q3',
+        field: 's6_q3_customer_data',
+        label: 'Sledujete zákaznická data (RFM, segmenty)?',
+        type: 'radio',
+        options: ['Ano', 'Částečně', 'Ne'],
+      },
+    ],
+  },
+  {
+    id: 'section-7',
+    title: 'Sekce 7: Marketing & řízení výkonu',
+    questions: [
+      {
+        id: 's7_q1',
+        field: 's7_q1_marketing_metrics',
+        label: 'Podle čeho hodnotíte marketing?',
+        type: 'checkbox',
+        options: ['ROAS / PNO', 'obrat', 'zisk', 'pocit'],
+      },
+    ],
+  },
+  {
+    id: 'section-8',
+    title: 'Sekce 8: Otevřené otázky',
+    questions: [
+      {
+        id: 's8_q1',
+        field: 's8_q1_growth_barriers',
+        label: 'Kde vidíte největší brzdy růstu e-shopu?',
+        type: 'textarea',
+        placeholder: 'Popište vlastními slovy...',
+      },
+      {
+        id: 's8_q2',
+        field: 's8_q2_current_issues',
+        label: 'Co vás aktuálně nejvíc trápí v provozu?',
+        type: 'textarea',
+        placeholder: 'Popište vlastními slovy...',
+      },
+      {
+        id: 's8_q3',
+        field: 's8_q3_first_change',
+        label: 'Co byste chtěli změnit jako první?',
+        type: 'textarea',
+        placeholder: 'Popište vlastními slovy...',
+      },
+      {
+        id: 's8_q4',
+        field: 's8_q4_goods_flow',
+        label: 'Popište tok zboží od naskladnění až po expedici (jak fyzický tok zboží, tak software který používáte)',
+        type: 'textarea',
+        placeholder: 'Popište celý proces...',
+      },
+      {
+        id: 's8_q5',
+        field: 's8_q5_accounting_software',
+        label: 'Jaký používáte účetní software?',
+        type: 'text',
+        placeholder: 'např. Money S3, Pohoda, ...',
+      },
+      {
+        id: 's8_q6',
+        field: 's8_q6_data_export',
+        label: 'Lze z adminu e-shopu exportovat data o objednávkách a produktech? Ideálně přes XML nebo CSV feedy?',
+        type: 'textarea',
+        placeholder: 'Popište možnosti exportu...',
+      },
+    ],
+  },
+]
