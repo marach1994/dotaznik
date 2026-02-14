@@ -2,7 +2,7 @@ import { Pool } from 'pg'
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('vercel')
+  ssl: process.env.DATABASE_URL?.includes('sslmode=require') || process.env.DATABASE_URL?.includes('neon.tech') || process.env.DATABASE_URL?.includes('vercel')
     ? { rejectUnauthorized: false }
     : undefined,
 })
