@@ -49,6 +49,14 @@ export interface Questionnaire {
   s8_q4_goods_flow: string | null
   s8_q5_accounting_software: string | null
   s8_q6_data_export: string | null
+  s8_q7_working_right: string | null
+  s8_q8_money_leaks: string | null
+  s8_q9_repetitive_issues: string | null
+  s8_q10_most_errors: string | null
+  s8_q11_product_focus: string | null
+  s8_q12_growth_brake: string | null
+  s8_q13_automation_potential: string | null
+  s8_q14_future_vision: string | null
 }
 
 export type QuestionnaireUpdate = Partial<Omit<Questionnaire, 'id' | 'unique_code' | 'created_at'>>

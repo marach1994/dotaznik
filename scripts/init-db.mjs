@@ -43,11 +43,32 @@ CREATE TABLE IF NOT EXISTS questionnaires (
   s8_q3_first_change TEXT,
   s8_q4_goods_flow TEXT,
   s8_q5_accounting_software TEXT,
-  s8_q6_data_export TEXT
+  s8_q6_data_export TEXT,
+  s8_q7_working_right TEXT,
+  s8_q8_money_leaks TEXT,
+  s8_q9_repetitive_issues TEXT,
+  s8_q10_most_errors TEXT,
+  s8_q11_product_focus TEXT,
+  s8_q12_growth_brake TEXT,
+  s8_q13_automation_potential TEXT,
+  s8_q14_future_vision TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_unique_code ON questionnaires(unique_code);
 CREATE INDEX IF NOT EXISTS idx_created_at ON questionnaires(created_at DESC);
+
+-- Add new columns if they don't exist (for existing databases)
+DO $$
+BEGIN
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q7_working_right TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q8_money_leaks TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q9_repetitive_issues TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q10_most_errors TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q11_product_focus TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q12_growth_brake TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q13_automation_potential TEXT;
+  ALTER TABLE questionnaires ADD COLUMN IF NOT EXISTS s8_q14_future_vision TEXT;
+END $$;
 `
 
 async function main() {
