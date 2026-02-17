@@ -66,10 +66,17 @@ export default function QuestionnaireForm({ code, initialData }: QuestionnaireFo
     }
   }, [])
 
-  const updateField = (field: string, value: unknown) => {
+  const updateField = (field: string, value: unknown, immediate?: boolean) => {
     const newData = { ...data, [field]: value }
     setData(newData)
-    debouncedSave({ [field]: value })
+    if (immediate) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      save({ [field]: value })
+    } else {
+      debouncedSave({ [field]: value })
+    }
   }
 
   const handleManualSave = async () => {
@@ -153,7 +160,7 @@ export default function QuestionnaireForm({ code, initialData }: QuestionnaireFo
                   label={q.label}
                   options={q.options!}
                   value={(data[q.field] as string) || null}
-                  onChange={(val) => updateField(q.field, val)}
+                  onChange={(val) => updateField(q.field, val, true)}
                 />
               )
             }
@@ -164,7 +171,7 @@ export default function QuestionnaireForm({ code, initialData }: QuestionnaireFo
                   label={q.label}
                   options={q.options!}
                   value={(data[q.field] as string[]) || null}
-                  onChange={(val) => updateField(q.field, val)}
+                  onChange={(val) => updateField(q.field, val, true)}
                 />
               )
             }
