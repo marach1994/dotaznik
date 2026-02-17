@@ -28,6 +28,9 @@ export function countAnswered(data: Record<string, unknown>): { answered: number
     's7_q1_marketing_metrics',
     's8_q1_growth_barriers', 's8_q2_current_issues', 's8_q3_first_change',
     's8_q4_goods_flow', 's8_q5_accounting_software', 's8_q6_data_export',
+    's8_q7_working_right', 's8_q8_money_leaks', 's8_q9_repetitive_issues',
+    's8_q10_most_errors', 's8_q11_product_focus', 's8_q12_growth_brake',
+    's8_q13_automation_potential', 's8_q14_future_vision',
   ]
 
   const total = questionFields.length

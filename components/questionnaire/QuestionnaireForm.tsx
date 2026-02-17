@@ -57,14 +57,25 @@ export default function QuestionnaireForm({ code, initialData }: QuestionnaireFo
     }, 2000)
   }, [save])
 
-  // Cleanup timeout on unmount
+  // Flush pending save on page unload and cleanup on unmount
   useEffect(() => {
+    const flushPending = () => {
+      if (pendingDataRef.current) {
+        const payload = JSON.stringify(pendingDataRef.current)
+        navigator.sendBeacon(`/api/questionnaire/${code}`, new Blob([payload], { type: 'application/json' }))
+        pendingDataRef.current = null
+      }
+    }
+
+    window.addEventListener('beforeunload', flushPending)
     return () => {
+      window.removeEventListener('beforeunload', flushPending)
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
       }
+      flushPending()
     }
-  }, [])
+  }, [code])
 
   const updateField = (field: string, value: unknown, immediate?: boolean) => {
     const newData = { ...data, [field]: value }

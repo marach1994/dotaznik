@@ -47,42 +47,60 @@ const JSONB_FIELDS = [
   's7_q1_marketing_metrics',
 ]
 
+async function updateQuestionnaire(code: string, body: Record<string, unknown>) {
+  const setClauses: string[] = ['updated_at = NOW()']
+  const values: unknown[] = []
+  let paramIndex = 1
+
+  for (const field of UPDATABLE_FIELDS) {
+    if (field in body) {
+      let value = body[field]
+      if (JSONB_FIELDS.includes(field) && Array.isArray(value)) {
+        value = JSON.stringify(value)
+      }
+      setClauses.push(`${field} = $${paramIndex}`)
+      values.push(value)
+      paramIndex++
+    }
+  }
+
+  if (values.length === 0) {
+    return
+  }
+
+  values.push(code)
+  const query = `UPDATE questionnaires SET ${setClauses.join(', ')} WHERE unique_code = $${paramIndex} AND is_completed = FALSE`
+  await pool.query(query, values)
+}
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { code: string } }
 ) {
   try {
-    const { code } = params
     const body = await request.json()
-
-    // Build dynamic SET clause
-    const setClauses: string[] = ['updated_at = NOW()']
-    const values: unknown[] = []
-    let paramIndex = 1
-
-    for (const field of UPDATABLE_FIELDS) {
-      if (field in body) {
-        let value = body[field]
-        if (JSONB_FIELDS.includes(field) && Array.isArray(value)) {
-          value = JSON.stringify(value)
-        }
-        setClauses.push(`${field} = $${paramIndex}`)
-        values.push(value)
-        paramIndex++
-      }
-    }
-
-    if (values.length === 0) {
-      return NextResponse.json({ ok: true })
-    }
-
-    values.push(code)
-    const query = `UPDATE questionnaires SET ${setClauses.join(', ')} WHERE unique_code = $${paramIndex} AND is_completed = FALSE`
-    await pool.query(query, values)
-
+    await updateQuestionnaire(params.code, body)
     return NextResponse.json({ ok: true })
   } catch (error) {
     console.error('Error updating questionnaire:', error)
+    return NextResponse.json(
+      { error: 'Chyba při ukládání' },
+      { status: 500 }
+    )
+  }
+}
+
+// POST handler for sendBeacon (flush on page unload)
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { code: string } }
+) {
+  try {
+    const body = await request.json()
+    await updateQuestionnaire(params.code, body)
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error('Error updating questionnaire (beacon):', error)
     return NextResponse.json(
       { error: 'Chyba při ukládání' },
       { status: 500 }
