@@ -6,9 +6,10 @@ interface QuestionTextProps {
   value: string | null
   placeholder?: string
   onChange: (value: string) => void
+  onBlur?: () => void
 }
 
-export default function QuestionText({ label, type, value, placeholder, onChange }: QuestionTextProps) {
+export default function QuestionText({ label, type, value, placeholder, onChange, onBlur }: QuestionTextProps) {
   return (
     <div>
       <p className="font-medium text-gray-800 mb-3">{label}</p>
@@ -16,6 +17,7 @@ export default function QuestionText({ label, type, value, placeholder, onChange
         <textarea
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
           placeholder={placeholder}
           maxLength={5000}
           rows={4}
@@ -28,6 +30,7 @@ export default function QuestionText({ label, type, value, placeholder, onChange
           type="text"
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
           placeholder={placeholder}
           maxLength={500}
           className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-800

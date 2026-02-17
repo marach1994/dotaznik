@@ -77,6 +77,16 @@ export default function QuestionnaireForm({ code, initialData }: QuestionnaireFo
     }
   }, [code])
 
+  const flushSave = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    if (pendingDataRef.current) {
+      save(pendingDataRef.current)
+      pendingDataRef.current = null
+    }
+  }, [save])
+
   const updateField = (field: string, value: unknown, immediate?: boolean) => {
     const newData = { ...data, [field]: value }
     setData(newData)
@@ -194,6 +204,7 @@ export default function QuestionnaireForm({ code, initialData }: QuestionnaireFo
                 value={(data[q.field] as string) || null}
                 placeholder={q.placeholder}
                 onChange={(val) => updateField(q.field, val)}
+                onBlur={flushSave}
               />
             )
           })}
